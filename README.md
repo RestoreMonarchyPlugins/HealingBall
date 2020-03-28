@@ -1,3 +1,4 @@
+[![Version](https://img.shields.io/github/release/RestoreMonarchyPlugins/HealingBall.svg)](https://github.com/RestoreMonarchyPlugins/RestoreMonarchyPlugins/releases) [![Discord](https://discordapp.com/api/guilds/520355060312440853/widget.png)](https://restoremonarchy.com/discord)
 # HealingBall
 
 **HealingBall** - Plugin for Rocket Mod 4 Unturned.  
