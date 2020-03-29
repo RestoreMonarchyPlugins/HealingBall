@@ -50,7 +50,10 @@ namespace HealingBall
                     if (target.Health < health)
                         target.Heal((byte)(health - int.Parse(target.Health.ToString())));
                     else
+                    {
                         target.Damage((byte)(int.Parse(target.Health.ToString()) - health), Vector3.zero, EDeathCause.PUNCH, ELimb.SKULL, CSteamID.Nil);
+                        target.Player.life.serverSetBleeding(false);
+                    }
                     SendChat(up, $"{Instance.DefaultTranslations.Translate("SuccessfullySetHealth", target.CharacterName, health)}", Color.white);
                     if (Config.MessageSetHealth)
                         SendChat(target, $"{Instance.DefaultTranslations.Translate("HealthWasChanged", health)}", Color.white);
