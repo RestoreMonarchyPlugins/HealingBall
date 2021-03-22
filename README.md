@@ -21,5 +21,5 @@ This plugin makes possible to heal players, set custom health and other.
 ## Download link: [HealingBall.dll](https://github.com/RestoreMonarchyPlugins/HealingBall/releases/download/1.1/HealingBall.dll)
 
 ## Contacts:  
-**Discord:** Greenorine#1178 
+**Discord:** Greenorine#1178  
 **VK:** [Nikita Kubov](https://vk.com/greenorine)
