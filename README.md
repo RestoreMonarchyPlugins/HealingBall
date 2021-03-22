@@ -1,4 +1,4 @@
-[![Version](https://img.shields.io/github/release/RestoreMonarchyPlugins/HealingBall.svg)](https://github.com/RestoreMonarchyPlugins/RestoreMonarchyPlugins/releases) [![Discord](https://discordapp.com/api/guilds/520355060312440853/widget.png)](https://restoremonarchy.com/discord)
+[![Version](https://img.shields.io/github/release/Greenorine/HealingBall.svg)](https://github.com/Greenorine/HealingBall/releases)  
 # HealingBall
 
 **HealingBall** - Plugin for Rocket Mod 4 Unturned.  
@@ -18,7 +18,7 @@ This plugin makes possible to heal players, set custom health and other.
 **/fbr (name/steamid)** - Breaks a player's leg.  
 ```<Permission Cooldown="0">forcebroken</Permission>```  
 
-## Download link: [HealingBall.dll](https://github.com/RestoreMonarchyPlugins/HealingBall/releases/download/1.1/HealingBall.dll)
+## Download link: [HealingBall.dll](https://github.com/Greenorine/HealingBall/releases/download/1.1/HealingBall.dll)
 
 ## Contacts:  
 **Discord:** Greenorine#1178  
