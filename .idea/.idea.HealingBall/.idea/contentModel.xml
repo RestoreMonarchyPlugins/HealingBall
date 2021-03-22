@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\green\AppData\Local\JetBrains\Rider2020.3\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\green\AppData\Local\JetBrains\Rider2020.3\resharper-host\Local\Transient\Rider\v203\SolutionCaches\_HealingBall.-1050633191.00" t="ExcludeRecursive" />
+    <e p="D:\Документы\GitHub\HealingBall" t="IncludeRecursive">
+      <e p="bin" t="ExcludeRecursive" />
+      <e p="Commands" t="Include">
+        <e p="ForceBleedingCommand.cs" t="Include" />
+        <e p="ForceBrokenCommand.cs" t="Include" />
+        <e p="HealBallCommand.cs" t="Include" />
+        <e p="HealPlayerCommand.cs" t="Include" />
+        <e p="SetHealthCommand.cs" t="Include" />
+      </e>
+      <e p="Configuration.cs" t="Include" />
+      <e p="Extensions.cs" t="Include" />
+      <e p="HealingBall.csproj" t="IncludeRecursive" />
+      <e p="HealingBall.sln" t="IncludeFlat" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="Plugin.cs" t="Include" />
+      <e p="Properties" t="Include">
+        <e p="AssemblyInfo.cs" t="Include" />
+      </e>
+    </e>
+  </component>
+</project>

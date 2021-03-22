@@ -1,0 +1,14 @@
+D:\Документы\GitHub\HealingBall\bin\Debug\HealingBall.dll
+D:\Документы\GitHub\HealingBall\bin\Debug\HealingBall.pdb
+D:\Документы\GitHub\HealingBall\bin\Debug\Assembly-CSharp-firstpass.dll
+D:\Документы\GitHub\HealingBall\bin\Debug\Assembly-CSharp.dll
+D:\Документы\GitHub\HealingBall\bin\Debug\Rocket.API.dll
+D:\Документы\GitHub\HealingBall\bin\Debug\Rocket.Core.dll
+D:\Документы\GitHub\HealingBall\bin\Debug\Rocket.Unturned.dll
+D:\Документы\GitHub\HealingBall\bin\Debug\UnityEngine.CoreModule.dll
+D:\Документы\GitHub\HealingBall\bin\Debug\UnityEngine.dll
+D:\Документы\GitHub\HealingBall\obj\Debug\HealingBall.csprojAssemblyReference.cache
+D:\Документы\GitHub\HealingBall\obj\Debug\HealingBall.csproj.CoreCompileInputs.cache
+D:\Документы\GitHub\HealingBall\obj\Debug\HealingBall.csproj.CopyComplete
+D:\Документы\GitHub\HealingBall\obj\Debug\HealingBall.dll
+D:\Документы\GitHub\HealingBall\obj\Debug\HealingBall.pdb

@@ -19,47 +19,58 @@ namespace HealingBall
 
         public string Name => "healball";
 
-        public string Help => $"{Instance.DefaultTranslations.Translate("HealBallHelp")}";
+        public string Help => $"{Instance.Translations.Instance.Translate("HealBallHelp")}";
 
         public string Syntax => $"/healball [radius] - {Help}";
 
-        public List<string> Aliases => new List<string>() { "healb", "hball", "hb" };
+        public List<string> Aliases => new List<string>() {"healb", "hball", "hb"};
 
-        public List<string> Permissions => new List<string>() { "healball" };
+        public List<string> Permissions => new List<string>() {"healball"};
 
         public void Execute(IRP caller, string[] command)
         {
-            UP up = (UP)caller;
-            if (command.Length == 1)
+            var up = (UP) caller;
+            if (command.Length != 1)
             {
-                if (command[0] == "*")
+                SendChat(up, $"{Syntax}", Color.white);
+                return;
+            }
+
+            if (command[0] == "*")
+            {
+                foreach (var pl in Provider.clients)
                 {
-                    foreach (var pl in Provider.clients)
+                    pl.player.Heal();
+                    if (Config.MessageHeal)
+                        SendChat(UP.FromSteamPlayer(pl), $"{Instance.Translations.Instance.Translate("YouWasHealed")}",
+                            Color.white);
+                }
+
+                SendChat(up, $"{Instance.Translations.Instance.Translate("SuccessfullyHealed")}", Color.white);
+            }
+            else
+            {
+                if (int.Parse(command[0]) > 0 && int.Parse(command[0]) <= Config.MaximumRadius)
+                {
+                    var pls = Provider.clients.FindAll(x =>
+                        Vector3.Distance(up.Position, UP.FromSteamPlayer(x).Position) <= int.Parse(command[0]) &&
+                        x.playerID.steamID.m_SteamID != up.CSteamID.m_SteamID);
+                    foreach (var pl in pls)
                     {
                         pl.player.Heal();
                         if (Config.MessageHeal)
-                            SendChat(UP.FromSteamPlayer(pl), $"{Instance.DefaultTranslations.Translate("YouWasHealed")}", Color.white);
+                            SendChat(UP.FromSteamPlayer(pl),
+                                $"{Instance.Translations.Instance.Translate("YouWasHealed")}", Color.white);
                     }
-                    SendChat(up, $"{Instance.DefaultTranslations.Translate("SuccessfullyHealed")}", Color.white);
+
+                    SendChat(up,
+                        $"{Instance.Translations.Instance.Translate("SuccessfullyHealedRadius", pls.Count, command[0])}",
+                        Color.white);
                 }
                 else
-                {
-                    if (int.Parse(command[0]) > 0 && int.Parse(command[0]) <= Config.MaximumRadius)
-                    {
-                        var pls = Provider.clients.FindAll(x => Vector3.Distance(up.Position, UP.FromSteamPlayer(x).Position) <= int.Parse(command[0]) && x.playerID.steamID.m_SteamID != up.CSteamID.m_SteamID);
-                        foreach (var pl in pls)
-                        {
-                            pl.player.Heal();
-                            if (Config.MessageHeal)
-                                SendChat(UP.FromSteamPlayer(pl), $"{Instance.DefaultTranslations.Translate("YouWasHealed")}", Color.white);
-                        }
-                        SendChat(up, $"{Instance.DefaultTranslations.Translate("SuccessfullyHealedRadius", pls.Count, command[0])}", Color.white);
-                    }
-                    else
-                        SendChat(up, $"{Instance.DefaultTranslations.Translate("IncorrectRadius", Config.MaximumRadius)}", Color.white);
-                }
+                    SendChat(up, $"{Instance.Translations.Instance.Translate("IncorrectRadius", Config.MaximumRadius)}",
+                        Color.white);
             }
-            else SendChat(up, $"{Syntax}", Color.white);
         }
     }
 }

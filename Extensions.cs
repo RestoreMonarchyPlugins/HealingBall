@@ -10,9 +10,11 @@ namespace HealingBall
     public static class Extensions
     {
         public static Configuration Config => Plugin.Instance.Configuration.Instance;
+
         public static void SendChat(UP up, string text, Color color)
         {
-            ChatManager.serverSendMessage($"<b><color=green>[HealingBall]</color> {text}</b>", color, null, up.SteamPlayer(), EChatMode.SAY, "", true);
+            ChatManager.serverSendMessage($"<color=green>[HealingBall]</color> {text}", color, null,
+                up.SteamPlayer(), EChatMode.SAY, "", true);
         }
 
         public static void SendConsole(string text, ConsoleColor color)
@@ -22,14 +24,10 @@ namespace HealingBall
 
         public static bool TryFindPlayer(string parameter, out UP target)
         {
-            if (ulong.TryParse(parameter, out ulong SID))
-            {
-                target = UP.FromCSteamID(new CSteamID(SID));
-            }
-            else target = UP.FromName(parameter);
-            if (target != null)
-                return true;
-            else return false;
+            target = ulong.TryParse(parameter, out var sid)
+                ? UP.FromCSteamID(new CSteamID(sid))
+                : UP.FromName(parameter);
+            return target != null;
         }
 
         public static void Heal(this Player player)

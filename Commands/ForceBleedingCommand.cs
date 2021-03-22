@@ -21,53 +21,69 @@ namespace HealingBall
 
         public string Name => "forcebleeding";
 
-        public string Help => $"{Instance.DefaultTranslations.Translate("ForceBleedingHelp")}";
+        public string Help => $"{Instance.Translations.Instance.Translate("ForceBleedingHelp")}";
 
         public string Syntax => $"/forcebl (name/steamid) - {Help}";
 
-        public List<string> Aliases => new List<string>() { "forcebl", "fbl" };
+        public List<string> Aliases => new List<string>() {"forcebl", "fbl"};
 
-        public List<string> Permissions => new List<string>() { "forcebleeding" };
+        public List<string> Permissions => new List<string>() {"forcebleeding"};
 
         public void Execute(IRP caller, string[] command)
         {
-            if (caller is UP)
+            if (caller is UP up)
             {
-                UP up = (UP)caller;
-                if (command.Length == 1)
+                switch (command.Length)
                 {
-                    if (!TryFindPlayer(command[0], out UP target))
+                    case 1:
                     {
-                        SendChat(up, $"{Instance.DefaultTranslations.Translate("ErrorIncorrectPlayer")}", Color.white);
-                        return;
+                        if (!TryFindPlayer(command[0], out var target))
+                        {
+                            SendChat(up, $"{Instance.Translations.Instance.Translate("ErrorIncorrectPlayer")}",
+                                Color.white);
+                            return;
+                        }
+
+                        target.Player.life.serverSetBleeding(true);
+                        SendChat(up,
+                            $"{Instance.Translations.Instance.Translate("SuccessfullyForceBleeding", target.CharacterName)}",
+                            Color.white);
+                        if (Config.MessageForceBleeding)
+                            SendChat(target, $"{Instance.Translations.Instance.Translate("YouBleedingNow")}",
+                                Color.white);
+                        break;
                     }
-                    target.Player.life.serverSetBleeding(true);
-                    SendChat(up, $"{Instance.DefaultTranslations.Translate("SuccessfullyForceBleeding", target.CharacterName)}", Color.white);
-                    if (Config.MessageForceBleeding)
-                        SendChat(target, $"{Instance.DefaultTranslations.Translate("YouBleedingNow")}", Color.white);
+                    case 0:
+                        up.Player.life.serverSetBleeding(true);
+                        SendChat(up, $"{Instance.Translations.Instance.Translate("SuccessfullyForceBleedingYourself")}",
+                            Color.white);
+                        break;
+                    default:
+                        SendChat(up, $"{Syntax}", Color.white);
+                        break;
                 }
-                else if (command.Length == 0)
-                {
-                    up.Player.life.serverSetBleeding(true);
-                    SendChat(up, $"{Instance.DefaultTranslations.Translate("SuccessfullyForceBleedingYourself")}", Color.white);
-                }
-                else SendChat(up, $"{Syntax}", Color.white);
             }
             else
             {
-                if (command.Length == 1)
+                if (command.Length != 1)
                 {
-                    if (!TryFindPlayer(command[0], out UP target))
-                    {
-                        SendConsole($"{Instance.DefaultTranslations.Translate("ErrorIncorrectPlayer")}", ConsoleColor.White);
-                        return;
-                    }
-                    target.Player.life.serverSetBleeding(true);
-                    SendConsole($"{Instance.DefaultTranslations.Translate("SuccessfullyForceBleeding", target.CharacterName)}", ConsoleColor.White);
-                    if (Config.MessageForceBleeding)
-                        SendChat(target, $"{Instance.DefaultTranslations.Translate("YouBleedingNow")}", Color.white);
+                    SendConsole($"{Syntax}", ConsoleColor.White);
+                    return;
                 }
-                else SendConsole($"{Syntax}", ConsoleColor.White);
+
+                if (!TryFindPlayer(command[0], out var target))
+                {
+                    SendConsole($"{Instance.Translations.Instance.Translate("ErrorIncorrectPlayer")}",
+                        ConsoleColor.White);
+                    return;
+                }
+
+                target.Player.life.serverSetBleeding(true);
+                SendConsole(
+                    $"{Instance.Translations.Instance.Translate("SuccessfullyForceBleeding", target.CharacterName)}",
+                    ConsoleColor.White);
+                if (Config.MessageForceBleeding)
+                    SendChat(target, $"{Instance.Translations.Instance.Translate("YouBleedingNow")}", Color.white);
             }
         }
     }

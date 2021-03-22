@@ -21,72 +21,91 @@ namespace HealingBall
 
         public string Name => "sethealth";
 
-        public string Help => $"{Instance.DefaultTranslations.Translate("SetHealthHelp")}";
+        public string Help => $"{Instance.Translations.Instance.Translate("SetHealthHelp")}";
 
         public string Syntax => $"/sethealth [name/steamid] [amount] - {Help}";
 
-        public List<string> Aliases => new List<string>() { "sethp" };
+        public List<string> Aliases => new List<string>() {"sethp"};
 
-        public List<string> Permissions => new List<string>() { "sethealth" };
+        public List<string> Permissions => new List<string>() {"sethealth"};
 
         public void Execute(IRP caller, string[] command)
         {
-            if (caller is UP)
+            if (caller is UP up)
             {
-                UP up = (UP)caller;
-                if (command.Length == 2)
+                if (command.Length != 2)
                 {
-                    var health = int.Parse(command[1]);
-                    if (health == 0)
-                    {
-                        SendChat(up, $"{Instance.DefaultTranslations.Translate("ErrorIncorrectCount")}", Color.white);
-                        return;
-                    }
-                    if (!TryFindPlayer(command[0], out UP target))
-                    {
-                        SendChat(up, $"{Instance.DefaultTranslations.Translate("ErrorIncorrectPlayer")}", Color.white);
-                        return;
-                    }
-                    if (target.Health < health)
-                        target.Heal((byte)(health - int.Parse(target.Health.ToString())));
-                    else
-                    {
-                        target.Damage((byte)(int.Parse(target.Health.ToString()) - health), Vector3.zero, EDeathCause.PUNCH, ELimb.SKULL, CSteamID.Nil);
-                        target.Player.life.serverSetBleeding(false);
-                    }
-                    SendChat(up, $"{Instance.DefaultTranslations.Translate("SuccessfullySetHealth", target.CharacterName, health)}", Color.white);
-                    if (Config.MessageSetHealth)
-                        SendChat(target, $"{Instance.DefaultTranslations.Translate("HealthWasChanged", health)}", Color.white);
+                    SendChat(up, $"{Syntax}", Color.white);
+                    return;
                 }
-                else SendChat(up, $"{Syntax}", Color.white);
+
+                var health = int.Parse(command[1]);
+                if (health == 0)
+                {
+                    SendChat(up, $"{Instance.Translations.Instance.Translate("ErrorIncorrectCount")}", Color.white);
+                    return;
+                }
+
+                if (!TryFindPlayer(command[0], out var target))
+                {
+                    SendChat(up, $"{Instance.Translations.Instance.Translate("ErrorIncorrectPlayer")}", Color.white);
+                    return;
+                }
+
+                if (target.Health < health)
+                    target.Heal((byte) (health - int.Parse(target.Health.ToString())));
+                else
+                {
+                    target.Damage((byte) (int.Parse(target.Health.ToString()) - health), Vector3.zero,
+                        EDeathCause.PUNCH, ELimb.SKULL, CSteamID.Nil);
+                    target.Player.life.serverSetBleeding(false);
+                }
+
+                SendChat(up,
+                    $"{Instance.Translations.Instance.Translate("SuccessfullySetHealth", target.CharacterName, health)}",
+                    Color.white);
+                if (Config.MessageSetHealth)
+                    SendChat(target, $"{Instance.Translations.Instance.Translate("HealthWasChanged", health)}",
+                        Color.white);
             }
             else
             {
-                if (command.Length == 2)
+                if (command.Length != 2)
                 {
-                    var health = int.Parse(command[1]);
-                    if (health == 0)
-                    {
-                        SendConsole($"{Instance.DefaultTranslations.Translate("ErrorIncorrectCount")}", ConsoleColor.White);
-                        return;
-                    }
-                    if (!TryFindPlayer(command[0], out UP target))
-                    {
-                        SendConsole($"{Instance.DefaultTranslations.Translate("ErrorIncorrectPlayer")}", ConsoleColor.White);
-                        return;
-                    }
-                    if (target.Health < health)
-                        target.Heal((byte)(health - int.Parse(target.Health.ToString())));
-                    else
-                    {
-                        target.Damage((byte)(int.Parse(target.Health.ToString()) - health), Vector3.zero, EDeathCause.KILL, ELimb.LEFT_ARM, CSteamID.Nil);
-                        target.Player.life.serverSetBleeding(false);
-                    }
-                    SendConsole($"{Instance.DefaultTranslations.Translate("SuccessfullySetHealth", target.CharacterName, health)}", ConsoleColor.White);
-                    if (Config.MessageSetHealth)
-                        SendChat(target, $"{Instance.DefaultTranslations.Translate("HealthWasChanged", health)}", Color.white);
+                    SendConsole($"{Syntax}", ConsoleColor.White);
+                    return;
                 }
-                else SendConsole($"{Syntax}", ConsoleColor.White);
+
+                var health = int.Parse(command[1]);
+                if (health == 0)
+                {
+                    SendConsole($"{Instance.Translations.Instance.Translate("ErrorIncorrectCount")}",
+                        ConsoleColor.White);
+                    return;
+                }
+
+                if (!TryFindPlayer(command[0], out var target))
+                {
+                    SendConsole($"{Instance.Translations.Instance.Translate("ErrorIncorrectPlayer")}",
+                        ConsoleColor.White);
+                    return;
+                }
+
+                if (target.Health < health)
+                    target.Heal((byte) (health - int.Parse(target.Health.ToString())));
+                else
+                {
+                    target.Damage((byte) (int.Parse(target.Health.ToString()) - health), Vector3.zero,
+                        EDeathCause.KILL, ELimb.LEFT_ARM, CSteamID.Nil);
+                    target.Player.life.serverSetBleeding(false);
+                }
+
+                SendConsole(
+                    $"{Instance.Translations.Instance.Translate("SuccessfullySetHealth", target.CharacterName, health)}",
+                    ConsoleColor.White);
+                if (Config.MessageSetHealth)
+                    SendChat(target, $"{Instance.Translations.Instance.Translate("HealthWasChanged", health)}",
+                        Color.white);
             }
         }
     }

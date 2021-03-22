@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>HealingBall</RootNamespace>
     <AssemblyName>HealingBall</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
@@ -35,21 +35,36 @@
       <HintPath>C:\SteamCMD\steamapps\common\Unturned\Unturned_Data\Managed\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>Libraries\Assembly-CSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Assembly-CSharp-firstpass">
       <HintPath>C:\SteamCMD\steamapps\common\Unturned\Unturned_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="Assembly-CSharp-firstpass, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>Libraries\Assembly-CSharp-firstpass.dll</HintPath>
     </Reference>
     <Reference Include="Rocket.API">
       <HintPath>..\..\Lib\Rocket.API.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Rocket.API, Version=4.9.3.4, Culture=neutral, PublicKeyToken=null">
+      <HintPath>Libraries\Rocket.API.dll</HintPath>
+    </Reference>
     <Reference Include="Rocket.Core">
       <HintPath>..\..\Lib\Rocket.Core.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Rocket.Core, Version=4.9.3.4, Culture=neutral, PublicKeyToken=null">
+      <HintPath>Libraries\Rocket.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Rocket.Unturned">
       <HintPath>..\..\Lib\Rocket.Unturned.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="Rocket.Unturned, Version=4.9.3.10, Culture=neutral, PublicKeyToken=null">
+      <HintPath>Libraries\Rocket.Unturned.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -63,9 +78,15 @@
       <HintPath>..\..\Lib\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>Libraries\UnityEngine.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>..\..\Lib\UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>Libraries\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

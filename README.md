@@ -18,8 +18,8 @@ This plugin makes possible to heal players, set custom health and other.
 **/fbr (name/steamid)** - Breaks a player's leg.  
 ```<Permission Cooldown="0">forcebroken</Permission>```  
 
-## Download link: [HealingBall.dll](https://github.com/RestoreMonarchyPlugins/HealingBall/releases/download/1.0/HealingBall.dll)
+## Download link: [HealingBall.dll](https://github.com/RestoreMonarchyPlugins/HealingBall/releases/download/1.1/HealingBall.dll)
 
 ## Contacts:  
-**Discord:** Greenorine#8738  
-**VK:** [Gennadiy Bortkevich](https://vk.com/greenorine)
+**Discord:** Greenorine#1178
+**VK:** [Nikita Kubov](https://vk.com/greenorine)

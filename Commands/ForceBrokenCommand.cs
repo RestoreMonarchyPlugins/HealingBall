@@ -21,53 +21,69 @@ namespace HealingBall
 
         public string Name => "forcebroken";
 
-        public string Help => $"{Instance.DefaultTranslations.Translate("ForceBrokenHelp")}";
+        public string Help => $"{Instance.Translations.Instance.Translate("ForceBrokenHelp")}";
 
         public string Syntax => $"/forcebr (name/steamid) - {Help}";
 
-        public List<string> Aliases => new List<string>() { "forcebr", "fbr" };
+        public List<string> Aliases => new List<string>() {"forcebr", "fbr"};
 
-        public List<string> Permissions => new List<string>() { "forcebroken" };
+        public List<string> Permissions => new List<string>() {"forcebroken"};
 
         public void Execute(IRP caller, string[] command)
         {
-            if (caller is UP)
+            if (caller is UP up)
             {
-                UP up = (UP)caller;
-                if (command.Length == 1)
+                switch (command.Length)
                 {
-                    if (!TryFindPlayer(command[0], out UP target))
+                    case 1:
                     {
-                        SendChat(up, $"{Instance.DefaultTranslations.Translate("ErrorIncorrectPlayer")}", Color.white);
-                        return;
+                        if (!TryFindPlayer(command[0], out var target))
+                        {
+                            SendChat(up, $"{Instance.Translations.Instance.Translate("ErrorIncorrectPlayer")}",
+                                Color.white);
+                            return;
+                        }
+
+                        target.Player.life.serverSetLegsBroken(true);
+                        SendChat(up,
+                            $"{Instance.Translations.Instance.Translate("SuccessfullyForceBroken", target.CharacterName)}",
+                            Color.white);
+                        if (Config.MessageForceBroken)
+                            SendChat(target, $"{Instance.Translations.Instance.Translate("YourLegWasBroken")}",
+                                Color.white);
+                        break;
                     }
-                    target.Player.life.serverSetLegsBroken(true);
-                    SendChat(up, $"{Instance.DefaultTranslations.Translate("SuccessfullyForceBroken", target.CharacterName)}", Color.white);
-                    if (Config.MessageForceBroken)
-                        SendChat(target, $"{Instance.DefaultTranslations.Translate("YourLegWasBroken")}", Color.white);
+                    case 0:
+                        up.Player.life.serverSetLegsBroken(true);
+                        SendChat(up, $"{Instance.Translations.Instance.Translate("SuccessfullyForceBrokenYourself")}",
+                            Color.white);
+                        break;
+                    default:
+                        SendChat(up, $"{Syntax}", Color.white);
+                        break;
                 }
-                else if (command.Length == 0)
-                {
-                    up.Player.life.serverSetLegsBroken(true);
-                    SendChat(up, $"{Instance.DefaultTranslations.Translate("SuccessfullyForceBrokenYourself")}", Color.white);
-                }
-                else SendChat(up, $"{Syntax}", Color.white);
             }
             else
             {
-                if (command.Length == 1)
+                if (command.Length != 1)
                 {
-                    if (!TryFindPlayer(command[0], out UP target))
-                    {
-                        SendConsole($"{Instance.DefaultTranslations.Translate("ErrorIncorrectPlayer")}", ConsoleColor.White);
-                        return;
-                    }
-                    target.Player.life.serverSetLegsBroken(true);
-                    SendConsole($"{Instance.DefaultTranslations.Translate("SuccessfullyForceBroken", target.CharacterName)}", ConsoleColor.White);
-                    if (Config.MessageForceBroken)
-                        SendChat(target, $"{Instance.DefaultTranslations.Translate("YourLegWasBroken")}", Color.white);
+                    SendConsole($"{Syntax}", ConsoleColor.White);
+                    return;
                 }
-                else SendConsole($"{Syntax}", ConsoleColor.White);
+
+                if (!TryFindPlayer(command[0], out var target))
+                {
+                    SendConsole($"{Instance.Translations.Instance.Translate("ErrorIncorrectPlayer")}",
+                        ConsoleColor.White);
+                    return;
+                }
+
+                target.Player.life.serverSetLegsBroken(true);
+                SendConsole(
+                    $"{Instance.Translations.Instance.Translate("SuccessfullyForceBroken", target.CharacterName)}",
+                    ConsoleColor.White);
+                if (Config.MessageForceBroken)
+                    SendChat(target, $"{Instance.Translations.Instance.Translate("YourLegWasBroken")}", Color.white);
             }
         }
     }
